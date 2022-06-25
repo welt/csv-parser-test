@@ -17,7 +17,7 @@ class CsvCleaner
 
     protected $parser;
 
-    public static function factory(LoaderInterface $loader, ParserInterface $parser) : CsvCleaner
+    public static function factory($loader, $parser) : CsvCleaner
     {
         return new CsvCleaner($loader, $parser);
     }

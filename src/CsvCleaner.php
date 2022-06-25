@@ -1,6 +1,6 @@
 <?php
 /**
- * Cleans & parses a CSV file to genrate an array of person arrays
+ * Cleans & parses a CSV file to generate an array of person arrays
  * from mixed format strings in cell column one.
  * @file CsvCleaner
  */

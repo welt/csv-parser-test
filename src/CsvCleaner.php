@@ -1,7 +1,8 @@
 <?php
 /**
- * Parses mixed format string in to an array of key value pairs.
- * @file Parser
+ * Cleans & parses a CSV file to genrate an array of person arrays
+ * from mixed format strings in cell column one.
+ * @file CsvCleaner
  */
 namespace App;
 

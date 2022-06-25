@@ -5,6 +5,8 @@
  */
 namespace App;
 
+const COLUMN_HEADER = 'homeowner';
+
 class CsvCleaner
 {
 
@@ -12,19 +14,35 @@ class CsvCleaner
 
     protected $loader;
 
-    public static function factory(Loader $loader) : CsvCleaner
+    protected $parser;
+
+    public static function factory(Loader $loader, Parser $parser) : CsvCleaner
     {
-        return new CsvCleaner($loader);
+        return new CsvCleaner($loader, $parser);
     }
 
-    private function __construct(Loader $loader)
+    private function __construct(Loader $loader, Parser $parser)
     {
         $this->loader = $loader;
+        $this->parser = $parser;
     }
 
     public function getPeople()
     {
-        return array();
+        $result = array();
+        foreach ($this->file as $row) {
+            [$firstCell] = $row;
+            if ($firstCell !== COLUMN_HEADER) {
+                $result[] = $this->parser->parse($firstCell);
+            }
+        }
+
+        return array_reduce($result, function ($accumulator, $group) {
+            foreach ($group as $person) {
+                $accumulator[] = $person;
+            }
+            return $accumulator;
+        }, []);
     }
 
     public function setFile(string $filepath) : bool

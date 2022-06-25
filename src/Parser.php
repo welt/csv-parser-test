@@ -5,7 +5,7 @@
  */
 namespace App;
 
-class Parser
+class Parser implements ParserInterface
 {
 
     public function parse(string $str) : array

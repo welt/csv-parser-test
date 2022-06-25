@@ -7,7 +7,7 @@ namespace App;
 
 use \SplFileObject;
 
-class Loader
+class Loader implements LoaderInterface
 {
 
     protected $file;

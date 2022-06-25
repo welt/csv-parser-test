@@ -12,14 +12,19 @@ class CsvCleaner
 
     protected $loader;
 
+    public static function factory(Loader $loader) : CsvCleaner
+    {
+        return new CsvCleaner($loader);
+    }
+
+    private function __construct(Loader $loader)
+    {
+        $this->loader = $loader;
+    }
+
     public function getPeople()
     {
         return array();
-    }
-
-    public function __construct(Loader $loader)
-    {
-        $this->loader = $loader;
     }
 
     public function setFile(string $filepath) : bool

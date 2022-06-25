@@ -21,7 +21,8 @@
         }
     },
     "scripts": {
-        "test": "vendor/bin/phpunit tests --colors"
+        "test": "vendor/bin/phpunit tests --colors",
+        "start": "php -S localhost:8000"
     },
     "license": "UNLICENSED",
     "authors": [

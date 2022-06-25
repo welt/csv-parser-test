@@ -2,4 +2,4 @@
 
 + $ composer run-script test
 
-+ $ php -S localhost:8000
++ $ composer run-script start

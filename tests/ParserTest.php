@@ -45,4 +45,25 @@ class ParserTest extends TestCase
         );
         $this->assertEquals($expected, $result);
     }
+
+    public function test_it_should_parse_old_style_couple()
+    {
+        $parser   = new Parser();
+        $result   = $parser->parse('Dr & Mrs Joe Bloggs');
+        $expected = array(
+            [
+                'title'       => 'Dr',
+                'first_name'  => 'Joe',
+                'initial'     => null,
+                'last_name'   => 'Bloggs',
+            ],
+            [
+                'title'       => 'Mrs',
+                'first_name'  => 'Joe',
+                'initial'     => null,
+                'last_name'   => 'Bloggs',
+            ],
+        );
+        $this->assertEquals($expected, $result);
+    }
 }

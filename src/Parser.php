@@ -13,34 +13,29 @@ class Parser
         $tokens = self::tokenise($str);
         $result = [];
         if (self::isTwoTitleCouple($tokens)) {
-            $personOneFirstName = self::isAnInitial($tokens[1]) === false ? $tokens[1] : null;
-            $personOneInitial   = self::isAnInitial($tokens[1]) ? $tokens[1] : null;
-            $personTwoFirstName = self::isAnInitial($tokens[5]) === false ? $tokens[5] : null;
-            $personTwoInitial   = self::isAnInitial($tokens[5]) ? $tokens[5] : null;
-            $result[] = $this->renderPerson($tokens[0], $personOneFirstName, $personOneInitial, $tokens[2]);
-            $result[] = $this->renderPerson($tokens[4], $personTwoFirstName, $personTwoInitial, end($tokens));
+            $result[] = $this->renderPerson($tokens[0], $tokens[1], $tokens[2]);
+            $result[] = $this->renderPerson($tokens[4], $tokens[5], end($tokens));
         } elseif (self::isOldStyleCouple($tokens)) {
-            $result[] = $this->renderPerson($tokens[0], $tokens[3], null, end($tokens));
-            $result[] = $this->renderPerson($tokens[2], $tokens[3], null, end($tokens));
+            $result[] = $this->renderPerson($tokens[0], $tokens[3], end($tokens));
+            $result[] = $this->renderPerson($tokens[2], $tokens[3], end($tokens));
         } elseif (self::isTitleCouple($tokens)) {
-            $result[] = $this->renderPerson($tokens[0], null, null, end($tokens));
-            $result[] = $this->renderPerson($tokens[2], null, null, end($tokens));
+            $result[] = $this->renderPerson($tokens[0], null, end($tokens));
+            $result[] = $this->renderPerson($tokens[2], null, end($tokens));
         } else {
-            $result[] = $this->renderPerson($tokens[0], $tokens[1], null, end($tokens));
+            $result[] = $this->renderPerson($tokens[0], $tokens[1], end($tokens));
         }
         return $result;
     }
 
     protected function renderPerson(
         ?string $title,
-        ?string $first_name,
-        ?string $initial,
+        ?string $nameOrIntial,
         string $last_name
     ) : array {
             return array(
                 'title'      => $title,
-                'first_name' => $first_name,
-                'initial'    => $initial,
+                'first_name' => self::isAnInitial($nameOrIntial) ? null : $nameOrIntial,
+                'initial'    => self::isAnInitial($nameOrIntial) ? $nameOrIntial : null,
                 'last_name'  => $last_name,
             );
     }
@@ -77,8 +72,11 @@ class Parser
         return self::isCouple($arr) && count($arr) === 7;
     }
 
-    protected static function isAnInitial(string $str) : bool
+    protected static function isAnInitial(?string $str) : bool
     {
+        if ($str === null) {
+            return false;
+        }
         // If it's a single character and it's a letter.
         $cleaned = preg_replace('/[^a-z]+/i', '', $str);
         return preg_match_all('/\w/u', $cleaned) === 1;

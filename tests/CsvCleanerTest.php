@@ -46,4 +46,74 @@ class CsvCleanerTest extends TestCase
 
         $this->assertEquals($expected, $result);
     }
+
+    public function test_it_should_generate_two_people()
+    {
+        $filepath   = 'tests/data/csv/examples__two.csv';
+        $csvCleaner = CsvCleaner::factory(new Loader(), new Parser());
+        $csvCleaner->setFile($filepath);
+        $result   = $csvCleaner->getPeople();
+        $expected = array(
+            [
+                'title'      => 'Mr',
+                'first_name' => 'Tom',
+                'initial'    => null,
+                'last_name'  => 'Staff',
+            ],
+            [
+                'title'      => 'Mr',
+                'first_name' => 'John',
+                'initial'    => null,
+                'last_name'  => 'Doe',
+            ]
+        );
+
+        $this->assertEquals($expected, $result);
+    }
+
+    public function test_it_should_generate_four_people()
+    {
+        $filepath   = 'tests/data/csv/examples__four.csv';
+        $csvCleaner = CsvCleaner::factory(new Loader(), new Parser());
+        $csvCleaner->setFile($filepath);
+        $result   = $csvCleaner->getPeople();
+        $expected = array(
+            [
+                'title'      => 'Mr',
+                'first_name' => 'Tom',
+                'initial'    => null,
+                'last_name'  => 'Staff',
+            ],
+            [
+                'title'      => 'Mr',
+                'first_name' => 'John',
+                'initial'    => null,
+                'last_name'  => 'Doe',
+            ],
+            [
+                'title'      => 'Dr',
+                'first_name' => 'Joe',
+                'initial'    => null,
+                'last_name'  => 'Bloggs',
+            ],
+            [
+                'title'      => 'Mrs',
+                'first_name' => 'Joe',
+                'initial'    => null,
+                'last_name'  => 'Bloggs',
+            ]
+        );
+
+        $this->assertEquals($expected, $result);
+    }
+
+    public function test_it_should_generate_eighteen_people()
+    {
+        $filepath   = 'tests/data/csv/examples__284_29.csv';
+        $csvCleaner = CsvCleaner::factory(new Loader(), new Parser());
+        $csvCleaner->setFile($filepath);
+        $result = $csvCleaner->getPeople();
+
+        $this->assertCount(18, $result);
+    }
 }

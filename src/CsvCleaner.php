@@ -17,12 +17,12 @@ class CsvCleaner
 
     protected $parser;
 
-    public static function factory(Loader $loader, Parser $parser) : CsvCleaner
+    public static function factory(LoaderInterface $loader, ParserInterface $parser) : CsvCleaner
     {
         return new CsvCleaner($loader, $parser);
     }
 
-    private function __construct(Loader $loader, Parser $parser)
+    private function __construct(LoaderInterface $loader, ParserInterface $parser)
     {
         $this->loader = $loader;
         $this->parser = $parser;

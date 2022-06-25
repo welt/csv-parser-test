@@ -10,8 +10,6 @@ use \SplFileObject;
 class Loader implements LoaderInterface
 {
 
-    protected $file;
-
     /**
      * @param {string} $filepath - filepath
      */

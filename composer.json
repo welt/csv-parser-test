@@ -17,6 +17,9 @@
             "Tests\\": "tests/"
         }
     },
+    "scripts": {
+        "test": "vendor/bin/phpunit tests --colors"
+    },
     "license": "UNLICENSED",
     "authors": [
         {

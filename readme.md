@@ -1,5 +1,5 @@
 + $ composer install
 
-+ $ ./vendor/bin/phpunit tests --colors
++ $ composer run-script test
 
 + $ php -S localhost:8000

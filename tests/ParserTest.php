@@ -66,4 +66,25 @@ class ParserTest extends TestCase
         );
         $this->assertEquals($expected, $result);
     }
+
+    public function test_it_should_parse_two_title_couple()
+    {
+        $parser   = new Parser();
+        $result   = $parser->parse('Mr Tom Staff and Mr John Doe');
+        $expected = array(
+            [
+                'title'       => 'Mr',
+                'first_name'  => 'Tom',
+                'initial'     => null,
+                'last_name'   => 'Staff',
+            ],
+            [
+                'title'       => 'Mr',
+                'first_name'  => 'John',
+                'initial'     => null,
+                'last_name'   => 'Doe',
+            ],
+        );
+        $this->assertEquals($expected, $result);
+    }
 }

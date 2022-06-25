@@ -12,7 +12,14 @@ class Parser
     {
         $tokens = self::tokenise($str);
         $result = [];
-        if (self::isOldStyleCouple($tokens)) {
+        if (self::isTwoTitleCouple($tokens)) {
+            $personOneFirstName = self::isAnInitial($tokens[1]) === false ? $tokens[1] : null;
+            $personOneInitial   = self::isAnInitial($tokens[1]) ? $tokens[1] : null;
+            $personTwoFirstName = self::isAnInitial($tokens[5]) === false ? $tokens[5] : null;
+            $personTwoInitial   = self::isAnInitial($tokens[5]) ? $tokens[5] : null;
+            $result[] = $this->renderPerson($tokens[0], $personOneFirstName, $personOneInitial, $tokens[2]);
+            $result[] = $this->renderPerson($tokens[4], $personTwoFirstName, $personTwoInitial, end($tokens));
+        } elseif (self::isOldStyleCouple($tokens)) {
             $result[] = $this->renderPerson($tokens[0], $tokens[3], null, end($tokens));
             $result[] = $this->renderPerson($tokens[2], $tokens[3], null, end($tokens));
         } elseif (self::isTitleCouple($tokens)) {
@@ -62,5 +69,18 @@ class Parser
         // If it's a couple and there's a conjunction in the first three tokens.
         $pruned = array_slice($arr, 0, 3);
         return self::isCouple($pruned) && end($arr) !== $arr[3];
+    }
+
+    protected static function isTwoTitleCouple(array $arr) : bool
+    {
+        // If it's a couple and there are seven tokens.
+        return self::isCouple($arr) && count($arr) === 7;
+    }
+
+    protected static function isAnInitial(string $str) : bool
+    {
+        // If it's a single character and it's a letter.
+        $cleaned = preg_replace('/[^a-z]+/i', '', $str);
+        return preg_match_all('/\w/u', $cleaned) === 1;
     }
 }

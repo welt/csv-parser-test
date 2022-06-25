@@ -29,13 +29,13 @@ class Parser implements ParserInterface
 
     protected function renderPerson(
         ?string $title,
-        ?string $nameOrInitial,
+        ?string $name_or_initial,
         string $last_name
     ) : array {
             return array(
                 'title'      => $title,
-                'first_name' => self::isAnInitial($nameOrInitial) ? null : $nameOrInitial,
-                'initial'    => self::isAnInitial($nameOrInitial) ? $nameOrInitial : null,
+                'first_name' => self::isAnInitial($name_or_initial) ? null : $name_or_initial,
+                'initial'    => self::isAnInitial($name_or_initial) ? $name_or_initial : null,
                 'last_name'  => $last_name,
             );
     }

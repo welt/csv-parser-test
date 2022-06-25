@@ -1,0 +1,40 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"workbench.colorCustomizations": {
+			"activityBar.activeBackground": "#06079c",
+			"activityBar.activeBorder": "#b80708",
+			"activityBar.background": "#06079c",
+			"activityBar.foreground": "#e7e7e7",
+			"activityBar.inactiveForeground": "#e7e7e799",
+			"activityBarBadge.background": "#b80708",
+			"activityBarBadge.foreground": "#e7e7e7",
+			"sash.hoverBorder": "#06079c",
+			"statusBar.background": "#04056b",
+			"statusBar.foreground": "#e7e7e7",
+			"statusBarItem.hoverBackground": "#06079c",
+			"statusBarItem.remoteBackground": "#04056b",
+			"statusBarItem.remoteForeground": "#e7e7e7",
+			"titleBar.activeBackground": "#04056b",
+			"titleBar.activeForeground": "#e7e7e7",
+			"titleBar.inactiveBackground": "#04056b99",
+			"titleBar.inactiveForeground": "#e7e7e799"
+		},
+		"peacock.color": "#04056b",
+		"phpcs.enable": true,
+		"phpcs.standard": "PSR2",
+		"phpcs.executablePath": "./vendor/bin/phpcs",
+		"phpcs.showWarnings": true,
+		"phpcs.composerJsonPath": "composer.json",
+		"phpcs.errorSeverity": 5,
+		"php.suggest.basic": true,
+		"phpcbf.documentFormattingProvider": true,
+		"phpcbf.executablePath": "./vendor/bin/phpcbf",
+		"phpcbf.onsave": true,
+		"phpcbf.standard": "PSR2",
+	}
+}

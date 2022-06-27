@@ -28,7 +28,7 @@ class CsvCleaner
         $this->parser = $parser;
     }
 
-    public function getPeople()
+    public function getPeople() : array
     {
         $result = array();
         foreach ($this->file as $row) {
